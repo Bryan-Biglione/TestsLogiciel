@@ -27,7 +27,7 @@ public class VoitureTest {
 
     @Test
     void creerVoitureFalse(){
-        assertFalse("def", v.getMarque());
-        assertFalse(1, v.getPrix());
+        assertNotEquals("def", v.getMarque());
+        assertNotEquals(1, v.getPrix());
     }
 }
