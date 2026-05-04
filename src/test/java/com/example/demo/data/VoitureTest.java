@@ -6,6 +6,7 @@ import org.springframework.util.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 public class VoitureTest {
@@ -22,5 +23,11 @@ public class VoitureTest {
         assertEquals("abc", v.getMarque());
         assertEquals(1,v.getId());
         assertEquals(10000, v.getPrix());
+    }
+
+    @Test
+    void creerVoitureFalse(){
+        assertFalse("def", v.getMarque());
+        assertFalse(1, v.getPrix());
     }
 }
