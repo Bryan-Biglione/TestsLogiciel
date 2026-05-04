@@ -3,6 +3,7 @@ package com.example.demo.data;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.*;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VoitureTest {
 
     private Voiture v;
-    @Before
+    @BeforeEach
     void init (){
         v = new Voiture("abc", 100000);
     }
