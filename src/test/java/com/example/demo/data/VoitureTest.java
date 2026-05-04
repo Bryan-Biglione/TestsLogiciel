@@ -12,7 +12,7 @@ public class VoitureTest {
     private Voiture v;
     @Before
     void init (){
-        v = new Voiture("abc", 100000)
+        v = new Voiture("abc", 100000);
     }
 
     @Test
