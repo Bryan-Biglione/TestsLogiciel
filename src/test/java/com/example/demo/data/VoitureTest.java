@@ -13,7 +13,7 @@ public class VoitureTest {
     private Voiture v;
     @BeforeEach
     void init (){
-        v = new Voiture("abc", 100000);
+        v = new Voiture("abc", 10000);
     }
 
     @Test
