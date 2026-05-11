@@ -14,4 +14,43 @@ public class StatistiqueTests {
     @MockBean
     StatistiqueImpl statistiqueImpl;
 
+    @Test
+    void testAjouter(){
+        
+        Voiture v = new Voiture("abc", 10000);
+
+        statistiqueImpl.ajouter(v);
+
+        verify(statistiqueImpl, times(1)).ajouter(v);
+    }
+
+    @Test
+    void testPrixMoyen(){
+
+        Echantillon fauxResultat = new Echantillon(2, 5000);
+
+        when(statistiqueImpl.prixMoyen()).thenReturn(fauxResultat);
+
+        Echantillon result = statistiqueImpl.prixMoyen();
+
+        verify(statistiqueImpl, times(1).prixMoyen());
+        assertThat(result).isNotNull();
+        assertThat(result.getNombreDeVoitures()).isEqualTo(2);
+        assertThat(result.getPrix()).isEqualTo(5000);
+    }
+
+    @Test
+    void testPrixMoyenException(){
+
+        when(statistiqueImpl.prixMoyen()).thenThrow(new ArithmeticException("erreur"));
+
+        assertThrows(ArithmeticException.class, () -> {
+            statistiqueImpl.prixMoyen();
+        });
+
+        verify(statistiqueImpl).prixMoyen();
+    }
+
+
+
 }
