@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.data.Voiture;
 import com.example.demo.service.Echantillon;
 import com.example.demo.service.StatistiqueImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,42 @@ class WebTests {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Test
+    void TestGetStatistiques() throws Exception {
+        when(statistiqueImpl.prixMoyen()).thenReturn(new Echantillon(1, 5000));
+
+        mockMvc.perform(get("/statistique"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nombreDeVoitures").value(1))
+                .andExpect(jsonPath("$.prixMoyen").value(5000));
+        
+        verify(statistiqueImpl, times(1)).prixMoyen();
+
+    }
+
+    @Test
+    void TestGetStatistiquesError() throws Exception {
+        when(statistiqueImpl.prixMoyen()).thenThrow(new ArithmeticException());
+
+        mockMvc.perform(get("/statistique"))
+            .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testCreerVoiture() throws Exception{
+    Voiture v = new Voiture("abc", 5000);
+
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonVoiture = mapper.writeValueAsString(v);
+
+    mockMvc.perform(post("/voiture")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(jsonVoiture))
+        .andExpect(status().isOk());
+
+    verify(statistiqueImpl, times(1)).ajouter(any(Voiture.class));
+    }
 
 }
