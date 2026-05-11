@@ -50,7 +50,7 @@ class WebTests {
     }
 
     @Test
-    testCreerVoiture() throws Exception{
+    void testCreerVoiture() throws Exception{
     Voiture v = new Voiture("abc", 5000);
 
     ObjectMapper mapper = new ObjectMapper();
