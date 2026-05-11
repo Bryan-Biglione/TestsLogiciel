@@ -28,6 +28,7 @@ class WebTests {
     @Autowired
     MockMvc mockMvc;
 
+    @Test
     void TestGetStatistiques() throws Exception {
         when(statistiqueImpl.prixMoyen()).thenReturn(new Echantillon(1, 5000));
 
@@ -42,8 +43,8 @@ class WebTests {
     }
 
     @Test
-    void TestGetStatistiquesError(){
-        when(statistiqueImpl).thenThrow(new ArithmeticException());
+    void TestGetStatistiquesError() throws Exception {
+        when(statistiqueImpl.prixMoyen()).thenThrow(new ArithmeticException());
 
         mockMvc.perform(get("/statistique"))
             .andExpect(status().isBadRequest());
