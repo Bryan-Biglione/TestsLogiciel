@@ -7,6 +7,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.mockito.Mockito.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @SpringBootTest
 public class StatistiqueTests {
@@ -33,10 +37,10 @@ public class StatistiqueTests {
 
         Echantillon result = statistiqueImpl.prixMoyen();
 
-        verify(statistiqueImpl, times(1).prixMoyen());
+        verify(statistiqueImpl, times(1)).prixMoyen();
         assertThat(result).isNotNull();
         assertThat(result.getNombreDeVoitures()).isEqualTo(2);
-        assertThat(result.getPrix()).isEqualTo(5000);
+        assertThat(result.getPrixMoyen()).isEqualTo(5000);
     }
 
     @Test
