@@ -43,9 +43,9 @@ class WebTests {
 
     @Test
     void TestGetStatistiquesError(){
-        when(statistiqueImpl()).thenThrow(new ArithmeticException());
+        when(statistiqueImpl).thenThrow(new ArithmeticException());
 
-        mockMvc.perfom(get("/statistique"))
+        mockMvc.perform(get("/statistique"))
             .andExcept(status().isBadRequest());
     }
 
@@ -56,7 +56,7 @@ class WebTests {
     ObjectMapper mapper = new ObjectMapper();
     String jsonVoiture = mapper.writeValueAsString(v);
 
-    mockMvc.perfom(post("/voiture"))
+    mockMvc.perform(post("/voiture"))
         .contentType(MediaType.APPLICATION_JSON)
         .content(jsonVoiture)
         .andExpect(status().isOk());
